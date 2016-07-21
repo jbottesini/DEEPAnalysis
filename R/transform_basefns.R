@@ -305,7 +305,7 @@ deepTransform <- function(DEEPtype, WD = getwd(), file_path, filter_by = NULL, c
   unshrunkenEstimates <- dplyr::select(survey_data_converted, matches("Response"), matches("Unshrunken"))
   write.csv(unshrunkenEstimates, "Unshrunken_Parameter_Estimates.csv", row.names = F)
 
-  if(collaborate){deepContribute(file_path)}
+  #if(collaborate){deepContribute(file_path)}
   if(tolower(DEEPtype) == "time"){deepSplit(survey_data_converted, tolower(DEEPtype))}
   if(tolower(DEEPtype) == "risk"){deepSplit(survey_data_converted, tolower(DEEPtype))}
 }
