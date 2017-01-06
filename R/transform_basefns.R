@@ -120,42 +120,74 @@ deepSplit <- function(raw_data, DEEPtype)
 #'
 
 # Takes Raw Participant Data from JSON format and adapts it. Feeds it to deepSplit.
-deepTransform <- function(DEEPtype, WD = getwd(), file_path, filter_by = NULL, collaborate)
+deepTransform <- function(DEEPtype, WD = getwd(), file_path, filter_by = NULL, collaborate = FALSE)
 {
   setwd(WD) #sets working directory
 
   file_path <- gsub("\\", "/", file_path, fixed = T)
   # Check format of file and load it in
 
+  # if (strEndsWith(file_path, "xml")) {
+  #   # Load XML
+  #   survey_data <- XML::xmlToDataFrame(file_path, stringsAsFactors = FALSE)
+  # } else if (strEndsWith(file_path, "csv")) {
+  #   # Load CSV
+  #   survey_data <- read.csv(file_path, header = TRUE, stringsAsFactors = FALSE)
+  # 
+  #   # Change Headers, Eliminate duplicate Columns & Delete first row
+  #   colnames(survey_data) = survey_data[1, ]
+  #   survey_data <- survey_data[-1,]
+  #   survey_data <- survey_data[ , !duplicated(colnames(survey_data))]
+  # } else {
+  #   stop("Invalid file. File must be an XML or CSV.")
+  # }
+
   if (strEndsWith(file_path, "xml")) {
     # Load XML
     survey_data <- XML::xmlToDataFrame(file_path, stringsAsFactors = FALSE)
   } else if (strEndsWith(file_path, "csv")) {
     # Load CSV
-    survey_data <- read.csv(file_path, header = TRUE, stringsAsFactors = FALSE)
-
+    survey_data <- read.csv(file_path, header = FALSE, stringsAsFactors = FALSE)
+    
+    # Detect double header row
+    colNameIndex <- survey_data[1:2, ]
+    colnames(colNameIndex) <- colNameIndex[1, ]
+    colNameIndex <- dplyr::select(colNameIndex, matches(filter_by))
+    colNameIndex <- ifelse(colNameIndex[1,1] == colNameIndex[2,1],2,1) # #if duplicate, take 2nd row
+    
     # Change Headers, Eliminate duplicate Columns & Delete first row
-    colnames(survey_data) = survey_data[1, ]
-    survey_data <- survey_data[-1,]
+    survey_data[colNameIndex, ] <- gsub(" ", "", survey_data[colNameIndex, ], fixed = T)
+    colnames(survey_data) <- survey_data[colNameIndex, ]
+    survey_data <- survey_data[-colNameIndex,]
+    
+    # Remove Other rows if any are not fille with data. 
+    colNameIndex <- grep(filter_by, colnames(survey_data))
+    while(!grepl("[{},{", survey_data[1,colNameIndex], fixed = T)){survey_data <- survey_data[-1,]}
+    
+    # if(colNameIndex!=1) {survey_data <- survey_data[-1,]} 
     survey_data <- survey_data[ , !duplicated(colnames(survey_data))]
+    
+    # # Ensure that first index is correct. 
+    # colNameIndex <- grep(filter_by, colnames(survey_data))
+    # while(!grepl("[{},{", survey_data[1,colNameIndex], fixed = T)){survey_data <- survey_data[-1,]}
+    # 
   } else {
     stop("Invalid file. File must be an XML or CSV.")
   }
-
 
   # Expand out JSON fields json[]["id"] and json[]["answer"] to Q1ID and Q1Answer
   # For each row, we need to set Q[i]ID and Q[i]Answer
   survey_data_converted <- survey_data
 
-  if(!is.null(filter_by))
-  {
-    survey_data_converted <- dplyr::select(survey_data_converted, ResponseID, matches(filter_by))
+ 
+  #Select desired column
+  survey_data_converted <- dplyr::select(survey_data_converted, ResponseID, matches(filter_by))
+  
+  #Handle NA
+  survey_data_converted[survey_data_converted==""]  <- NA
+  survey_data_converted <- na.omit(survey_data_converted)
 
-    #Handle NA
-    survey_data_converted[survey_data_converted==""]  <- NA
-    survey_data_converted <- na.omit(survey_data_converted)
-  }
-
+  
 
   for (rowIterator in 1:nrow(survey_data_converted))
   {
