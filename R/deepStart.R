@@ -70,7 +70,7 @@ devtools::use_package("RCurl", type = "depends")
 #' }
 #'
 
-deepRun <- function(DEEPtype, WD = getwd(), file_path = NULL, filter_by = NULL, collaborate = TRUE)
+deepRun <- function(DEEPtype, WD = getwd(), file_path = NULL, filter_by, collaborate = FALSE)
 {
   if(is.null(file_path)){file_path <- file.choose()}
 
