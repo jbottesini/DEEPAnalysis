@@ -25,4 +25,3 @@ strEndsWith(haystack = "myQualtricsOutput.csv", needle = "csv")
 }
 
 }
-

@@ -5,7 +5,7 @@
 \title{Transforms JSON DEEP output into a readable dataframe}
 \usage{
 deepTransform(DEEPtype, WD = getwd(), file_path, filter_by = NULL,
-  collaborate)
+  collaborate = FALSE)
 }
 \arguments{
 \item{DEEPtype}{character string that specifies whether output is DEEP "risk" or "time".}
@@ -33,4 +33,3 @@ deepTransform(DEEPtype = "time", file_path = "/Documents/output.xml", filter_by 
 }
 
 }
-

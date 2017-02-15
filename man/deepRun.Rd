@@ -4,8 +4,8 @@
 \alias{deepRun}
 \title{Runs the DEEP Transformation, DEEP Split and Hierarchical Bayes algorithm.}
 \usage{
-deepRun(DEEPtype, WD = getwd(), file_path = NULL, filter_by = NULL,
-  collaborate = TRUE)
+deepRun(DEEPtype, WD = getwd(), file_path = NULL, filter_by,
+  collaborate = FALSE)
 }
 \arguments{
 \item{DEEPtype}{character string that specifies whether output is DEEP "risk" or "time".}
@@ -35,4 +35,3 @@ deepRun(DEEPtype = "time", WD = "/MyCurrentProject/DEEP", file_path = "/MyDocume
 }
 
 }
-

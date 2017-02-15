@@ -12,4 +12,3 @@ Outputs multiple files with Risk Preference Parameters.
 \description{
 \code{deepRiskHB} Estimates Risk Preferences and outputs results in current working directory.
 }
-

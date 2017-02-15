@@ -13,7 +13,7 @@ License: TBD - May be used for Academic Purposes ONLY. License requires
     you to cite the paper by Toubia, O., Johnson, E., Evgeniou, T., & Delquie, P.
     (2012).
 LazyData: TRUE
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Depends: dplyr,
     XML,
     jsonlite,

@@ -12,4 +12,3 @@ Outputs multiple files with Time Preference Parameters.
 \description{
 \code{deepTimeHB} Estimates Risk Preferences and outputs results in current working directory.
 }
-
