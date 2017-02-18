@@ -17,7 +17,7 @@
 
 #******* Originally called Time_Unbounded_100712.R *********#
 
-deepTimeHB <- function()
+deepTimeHB <- function(iterUntilSave = 10000, iterSaved = 40000)
 {
 
   #################################
@@ -45,7 +45,7 @@ deepTimeHB <- function()
   #################################
   #################################
 
-  hbfielddata_time <- function(spec, study_ID){
+  hbfielddata_time <- function(spec, study_ID,burnedIterations,savedIterations){
     # estimates time discounting parameters from field data
 
     nargin <- length(as.list(match.call())) -1
@@ -106,7 +106,7 @@ deepTimeHB <- function()
       write.csv(gambles1, filename, row.names = FALSE)
       filename = sprintf('gambles2_time_adaptive_%d_r.csv',study_ID)
       write.csv(gambles2, filename, row.names = FALSE)
-      hbtime092010qh(ngambles,ngambles,spec,study_ID)
+      hbtime092010qh(ngambles,ngambles,spec,study_ID,burnedIterations,savedIterations)
     }
   }
 
@@ -118,7 +118,7 @@ deepTimeHB <- function()
   #################################
   #################################
 
-  hbtime092010qh <- function (qmax,quest,spec,name){
+  hbtime092010qh <- function (qmax,quest,spec,name,nit1,nit2){
 
     nargin <- length(as.list(match.call())) -1
 
@@ -197,8 +197,8 @@ deepTimeHB <- function()
     N=p+people
     jump=0.01
 
-    nit1=10000
-    nit2=40000
+    # nit1=10000
+    # nit2=40000
 
     alphaconv=c()
     deltaconv=c()

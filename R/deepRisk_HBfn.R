@@ -17,11 +17,12 @@
 
 #******* Originally called Risk_Unbounded_070113.R *********#
 
-deepRiskHB <- function()
+deepRiskHB <- function(iterUntilSave = 50000, iterSaved = 50000)
 {
 
   #change the value of the first argurment of hbvalue042710 to be the question that you want to estimate after
   # e.g. hbvalue042710(2,ngambles,spec,study_ID) to stop estimating after 2 questions
+  
 
   #################################
   #################################
@@ -97,7 +98,7 @@ deepRiskHB <- function()
   #################################
 
 
-  hbfielddata_risk <- function(spec,study_ID){
+  hbfielddata_risk <- function(spec,study_ID,burnedIterations,savedIterations){
     #estimates time discounting parameters from field data
 
     nargin <- length(as.list(match.call())) -1
@@ -173,7 +174,7 @@ deepRiskHB <- function()
       write.csv(gambles2, filename, row.names = FALSE)
 
       #change the value of the first argurment of hbvalue042710 to be the question that you want to estimate after
-      hbvalue042710(ngambles,ngambles,spec,study_ID)
+      hbvalue042710(ngambles,ngambles,spec,study_ID,burnedIterations,savedIterations)
     }
 
   }
@@ -184,7 +185,7 @@ deepRiskHB <- function()
   #####      4. hbvalue042710 function
   #################################
 
-  hbvalue042710 <- function(qmax,quest,spec,name){
+  hbvalue042710 <- function(qmax,quest,spec,name, nit1, nit2){
     #covariates include Gray waves.
     #for online experiment - includes covariates.
     #test: different sigmas for gains and losses.
@@ -259,8 +260,8 @@ deepRiskHB <- function()
     jump_delta=1e-5
     ###
 
-    nit1=50000
-    nit2=50000
+    # nit1 = 50000
+    # nit2 = 50000
 
     alphaconv=c()
     deltaconv=c()
@@ -668,7 +669,7 @@ deepRiskHB <- function()
 
   }
 
-  hbfielddata_risk(0,1)
+  hbfielddata_risk(0,1,iterUntilSave,iterSaved)
 
 
 

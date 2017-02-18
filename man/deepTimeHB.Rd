@@ -4,7 +4,7 @@
 \alias{deepTimeHB}
 \title{Estimation of Time Preference Parameters Using Hierarchical Markov Chain Mote Carlo Bayesian Framework}
 \usage{
-deepTimeHB()
+deepTimeHB(iterUntilSave = 10000, iterSaved = 40000)
 }
 \value{
 Outputs multiple files with Time Preference Parameters.

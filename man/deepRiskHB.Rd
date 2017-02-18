@@ -4,7 +4,7 @@
 \alias{deepRiskHB}
 \title{Estimation of Risk Preference Parameters Using Hierarchical Markov Chain Mote Carlo Bayesian Framework}
 \usage{
-deepRiskHB()
+deepRiskHB(iterUntilSave = 50000, iterSaved = 50000)
 }
 \value{
 Outputs multiple files with Risk Preference Parameters.
