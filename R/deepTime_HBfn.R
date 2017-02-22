@@ -540,6 +540,6 @@ deepTimeHB <- function(iterUntilSave = 10000, iterSaved = 40000)
   }
 
 
-  hbfielddata_time(0,1)
+  hbfielddata_time(0,1,iterUntilSave,iterSaved)
 
 }
