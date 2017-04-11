@@ -31,12 +31,12 @@
 #   data("all_questions_paths_risk", "all_questions_paths_time" package=pkgname, envir=parent.env(environment()))
 # }
 
-devtools::use_package("dplyr", type = "depends")
-devtools::use_package("XML", type = "depends")
-devtools::use_package("jsonlite", type = "depends")
-devtools::use_package("MSBVAR", type = "depends")
-devtools::use_package("MCMCpack", type = "depends")
-devtools::use_package("RCurl", type = "depends")
+devtools::use_package("dplyr")
+devtools::use_package("XML")
+devtools::use_package("jsonlite")
+devtools::use_package("MSBVAR")
+devtools::use_package("MCMCpack")
+devtools::use_package("RCurl")
 
 
 #################################
