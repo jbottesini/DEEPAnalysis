@@ -103,12 +103,15 @@ deepSplit <- function(raw_data, DEEPtype)
 #' @description
 #' \code{deepTransform} Reads the filetype of the Qualtrics/Limesurvey output and parses
 #' the JSON into a dataframe. Depending on the DEEP type, it sends it to the function \code{deepSplit}
-#' to create the inputs for the Hierarchical Bayes. If a specific survey question has been specified, it only transforms that part of the dataset.
+#' to create the inputs for the Hierarchical Bayes. If a specific survey question has been specified, 
+#' it only transforms that part of the dataset.
 #'
 #' @param DEEPtype character string that specifies whether output is DEEP "risk" or "time".
 #' @param WD allows the user to specify a working directory. Uses the current directory if no directory is specified.
 #' @param file_path contains the file path to the Limesurvey/Qualtrics output.
-#' @param filter_by specifies the name/identifier of the question you want to isolate for analysis. This parameter is used to analyze a dataset that contains multiple DEEP outputs but is optional when analyzing a single DEEP output.
+#' @param filter_by specifies the name/identifier of the question you want to isolate for analysis. 
+#' This parameter is used to analyze a dataset that contains multiple DEEP outputs but is optional 
+#' when analyzing a single DEEP output.
 #'
 #' @return a dataframe containing the parsed JSON with the Participant responses
 #' @return a CSV is exported with the unshrunken parameter estimates

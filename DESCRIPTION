@@ -24,3 +24,9 @@ Depends: dplyr,
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
+Imports: dplyr,
+    XML,
+    jsonlite,
+    MSBVAR,
+    MCMCpack,
+    RCurl
